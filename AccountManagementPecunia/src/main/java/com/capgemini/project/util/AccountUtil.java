@@ -1,7 +1,14 @@
 package com.capgemini.project.util;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Map;
+
+import javax.persistence.Convert;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.capgemini.project.entity.Account;
 import com.capgemini.project.entity.Address;
@@ -9,16 +16,20 @@ import com.capgemini.project.entity.Customer;
 
 public class AccountUtil {
 	
-	public static Account convertToAccount(Map<String ,Object> map) {
+	public static Account convertToAccount(Map<String ,Object> map){
 			
 		Account account=new Account();
 		
-		double accountBalance=(double)map.get("accountBalance");
+		double accountBalance=Double.parseDouble((String)map.get("accountBalance"));
 		String branchId=(String)map.get("branchId");
 		String accountType=(String)map.get("accountType");
 		String accountStatus=(String)map.get("accountStatus");
-		double accountInterest=(double)map.get("accountInterest");
-		Date lastUpdate=(Date)map.get("lastUpdate");
+		double accountInterest=Double.parseDouble((String)map.get("accountInterest"));
+		//String sDate =(String)map.get("lastUpdate");
+		//Date lastUpdate= new SimpleDateFormat("yyyy-mm-dd").parse(sDate);
+		
+		
+		Date lastUpdate=((Date)map.get("lastUpdate"));
 		
 		account.setAccountBalance(accountBalance);
 		account.setAccountInterest(accountInterest);
@@ -29,11 +40,12 @@ public class AccountUtil {
 		
 		return account;
 	}
-	public static Customer convertToCustomer(Map<String ,Object> map) {
+	public static Customer convertToCustomer(Map<String ,Object> map)  {
 			
 			Customer customer = new Customer();
 			
 			String customerName=(String)map.get("customerName");
+			//Date customerDob= new SimpleDateFormat("yyyy-mm-dd").parse((String)map.get("customerDob")) ;
 			Date customerDob=(Date)map.get("customerDob");
 			String customerGender=(String)map.get("customerGender");
 			String customerContactNumber=(String)map.get("customerContactNumber");

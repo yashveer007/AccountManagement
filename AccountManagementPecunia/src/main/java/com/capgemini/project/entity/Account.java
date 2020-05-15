@@ -13,6 +13,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="Accounts")
 public class Account {
@@ -40,6 +44,7 @@ public class Account {
 	private double accountInterest;
 	
 	@Column(name="Last_Update")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date lastUpdate;
 	
 	
@@ -160,6 +165,74 @@ public class Account {
 		this.accountType = accountType;
 		this.accountInterest = accountInterest;
 		this.lastUpdate = lastUpdate;
+	}
+
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(accountBalance);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((accountHolderId == null) ? 0 : accountHolderId.hashCode());
+		temp = Double.doubleToLongBits(accountInterest);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
+		result = prime * result + ((accountStatus == null) ? 0 : accountStatus.hashCode());
+		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
+		result = prime * result + ((branchId == null) ? 0 : branchId.hashCode());
+		result = prime * result + ((lastUpdate == null) ? 0 : lastUpdate.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (Double.doubleToLongBits(accountBalance) != Double.doubleToLongBits(other.accountBalance))
+			return false;
+		if (accountHolderId == null) {
+			if (other.accountHolderId != null)
+				return false;
+		} else if (!accountHolderId.equals(other.accountHolderId))
+			return false;
+		if (Double.doubleToLongBits(accountInterest) != Double.doubleToLongBits(other.accountInterest))
+			return false;
+		if (accountNumber == null) {
+			if (other.accountNumber != null)
+				return false;
+		} else if (!accountNumber.equals(other.accountNumber))
+			return false;
+		if (accountStatus == null) {
+			if (other.accountStatus != null)
+				return false;
+		} else if (!accountStatus.equals(other.accountStatus))
+			return false;
+		if (accountType == null) {
+			if (other.accountType != null)
+				return false;
+		} else if (!accountType.equals(other.accountType))
+			return false;
+		if (branchId == null) {
+			if (other.branchId != null)
+				return false;
+		} else if (!branchId.equals(other.branchId))
+			return false;
+		if (lastUpdate == null) {
+			if (other.lastUpdate != null)
+				return false;
+		} else if (!lastUpdate.equals(other.lastUpdate))
+			return false;
+		return true;
 	}
 
 
