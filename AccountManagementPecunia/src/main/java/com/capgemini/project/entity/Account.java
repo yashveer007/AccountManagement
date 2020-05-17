@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Account {
 
 	@Id
-	@Min(value=12)
+	@Size(min=12)
 	@Column(name="Account_number")
 	private String accountNumber;
 	 
-	@Min(value=6)
+	@Size(min=6)
 	@Column(name="Account_Holder_Id")
 	private String accountHolderId;
 	
@@ -37,7 +38,7 @@ public class Account {
 	@Column(name="Account_Balance")
 	private double accountBalance;
 	
-	@Min(value=4)
+	@Size(min = 4)
 	@Column(name="Branch_Id")
 	private String branchId;
 	

@@ -7,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="Addresses")
 public class Address {
 	
 	@Id
+	@Size(min = 6)
 	@Column(name="ADDRESS_ID")
 	private String addressId;
 	
