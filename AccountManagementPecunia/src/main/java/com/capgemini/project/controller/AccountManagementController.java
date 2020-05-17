@@ -23,7 +23,6 @@ import com.capgemini.project.entity.Address;
 import com.capgemini.project.entity.Customer;
 import com.capgemini.project.service.AccountManagementService;
 import com.capgemini.project.service.AccountManagementServiceImp;
-import com.capgemini.project.service.SequenceGeneratorService;
 import com.capgemini.project.util.AccountUtil;
 
 @RestController

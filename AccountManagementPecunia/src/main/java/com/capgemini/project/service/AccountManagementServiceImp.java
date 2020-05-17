@@ -16,6 +16,7 @@ import com.capgemini.project.entity.Account;
 import com.capgemini.project.entity.Address;
 import com.capgemini.project.entity.Customer;
 import com.capgemini.project.exception.AccountException;
+import com.capgemini.project.util.AccountUtil;
 
 
 @Service
@@ -31,15 +32,17 @@ public class AccountManagementServiceImp implements AccountManagementService {
 	@Autowired
 	private AddressEntityDao addressEntityDao;
 	
-	@Autowired
-	private SequenceGeneratorService numberGeneratorService;
+	
 
 	@Override
 	public String addAccount(Account account, Customer customer, Address address) {
 		
-		String generatedAccountNumber=String.valueOf(numberGeneratorService.generateAccountNumber());
-		String genereatedAccountHolderId=String.valueOf(numberGeneratorService.generateCustomerId());
-		String generatedAddressId=String.valueOf(numberGeneratorService.generateAddressId());
+		if(account==null) {
+			throw new AccountException("Account can't find");
+		}
+		String generatedAccountNumber=AccountUtil.generateId(12);
+		String genereatedAccountHolderId=AccountUtil.generateId(6);
+		String generatedAddressId=AccountUtil.generateId(6);
 		
 		account.setAccountNumber(generatedAccountNumber);
 		account.setAccountHolderId(genereatedAccountHolderId);
@@ -57,12 +60,21 @@ public class AccountManagementServiceImp implements AccountManagementService {
 	@Override
 	public boolean deleteAccount(Account account){
 		
+		if(account==null) {
+			throw new AccountException("Account can't find");
+		}
 		account=accountEntityDao.save(account);
 		return true;
 	}
 
 	@Override
 	public boolean updateAccountAddress(Account account, Address address) {
+		if(account==null) {
+			throw new AccountException("Account can't find");
+		}
+		if(address==null) {
+			throw new AccountException("Address can't find");
+		}
 		account=accountEntityDao.save(account);
 		address= addressEntityDao.save(address);
 		return true;
@@ -70,6 +82,12 @@ public class AccountManagementServiceImp implements AccountManagementService {
 
 	@Override
 	public boolean updateName(Account account, Customer customer) {
+		if(account==null) {
+			throw new AccountException("Account can't find");
+		}
+		if(customer==null) {
+			throw new AccountException("customer can't find");
+		}
 		account=accountEntityDao.save(account);
 		customer=customerEntityDao.save(customer);
 		return true;
@@ -78,6 +96,12 @@ public class AccountManagementServiceImp implements AccountManagementService {
 
 	@Override
 	public boolean updateContact(Account account, Customer customer){
+		if(account==null) {
+			throw new AccountException("Account can't find");
+		}
+		if(customer==null) {
+			throw new AccountException("customer can't find");
+		}
 		account=accountEntityDao.save(account);
 		customer=customerEntityDao.save(customer);
 		return true;

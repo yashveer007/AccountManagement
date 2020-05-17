@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,28 +22,34 @@ public class Customer {
 	
 	
 	@Id
+	@Min(value = 6)
 	@Column(name="Customer_ID")
 	private String customerId; 
-
+	
+	
 	@Column(name="Customer_Address")
 	private String address;
 	
+	@NotBlank(message = "Customername cannot be empty and only alphabets are allowed")
 	@Column(name="Customer_Name")
 	private String customerName;
 	
 	@Column(name="DOB")
-	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date DOB;
 	
 	@Column(name="Gender")
 	private String gender;
 	
+	@Min(value = 10)
 	@Column(name="Contact_Number")
 	private String contactNumber;
 	
+	@Min(value = 10)
+	@NotBlank(message = "First five char should be an alphabet and next four should be digit and last should be an alphabet")
 	@Column(name="Pan_Number")
 	private String panNumber;
 	
+	@Min(value = 12)
 	@Column(name="Adhaar_Number")
 	private String aadharNumber;
 
