@@ -23,11 +23,11 @@ public class AccountUtil {
 			
 		Account account=new Account();
 		
-		double accountBalance=Double.parseDouble((String)map.get("accountBalance"));
+		double accountBalance=(double)map.get("accountBalance");
 		String branchId=(String)map.get("branchId");
 		String accountType=(String)map.get("accountType");
 		String accountStatus=(String)map.get("accountStatus");
-		double accountInterest=Double.parseDouble((String)map.get("accountInterest"));
+		double accountInterest=(double)map.get("accountInterest");
 		String date=(String)map.get("lastUpdate");
 		DateTimeFormatter formatter=DateTimeFormatter.ofPattern(pattern);
         LocalDateTime dateTime=LocalDateTime.parse(date,formatter);
